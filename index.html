@@ -56,7 +56,7 @@
     .page {
       position: relative; z-index: 1;
       width: 100%; max-width: 560px;
-      padding: 2rem 1.25rem 3.5rem;
+      padding: 1.2rem .75rem 2.5rem;
       margin: 0 auto;
     }
 
@@ -106,7 +106,8 @@
       height: 3px;
       background: linear-gradient(90deg, transparent, var(--blue2), var(--blue3), transparent);
     }
-    .card-body { padding: 2rem 1.8rem; }
+    .card-body { padding: 1.5rem 1.25rem; }
+    @media (min-width: 500px) { .card-body { padding: 2rem 1.8rem; } }
 
     /* ─── Steps ─── */
     .step { display: none; animation: fadeUp .35s ease both; }
@@ -224,6 +225,7 @@
     #sigCanvas {
       display: block; width: 100%; background: #f8fafc;
       cursor: crosshair; touch-action: none;
+      min-height: 300px;
     }
 
     /* Line at bottom of canvas */
@@ -350,7 +352,7 @@
         <p class="sub">Usa el dedo o el mouse — como firmarías en papel</p>
 
         <div class="sig-wrap">
-          <canvas id="sigCanvas" height="200"></canvas>
+          <canvas id="sigCanvas" height="320"></canvas>
           <div class="sig-line"></div>
           <div class="sig-line-label">X — firma aquí</div>
           <div class="sig-hint" id="hint">
@@ -467,10 +469,11 @@ function initCanvas() {
   strokes = []; hasSig = false;
   hint.classList.remove('off');
   const w = sigCanvas.parentElement.clientWidth;
+  const h = Math.max(320, Math.round(window.innerHeight * 0.44));
   sigCanvas.width  = w * DPR;
-  sigCanvas.height = 200 * DPR;
+  sigCanvas.height = h * DPR;
   sigCanvas.style.width  = w + 'px';
-  sigCanvas.style.height = '200px';
+  sigCanvas.style.height = h + 'px';
   sigCtx.scale(DPR, DPR);
   clearSurface();
 }
